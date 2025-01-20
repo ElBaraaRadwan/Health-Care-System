@@ -1,0 +1,8 @@
+POST http://localhost:3000/patient
+Content-Type: application/json
+
+{
+  "name": "John Doe",
+  "age": 30,
+  "email": "johndoe@example.com"
+}
