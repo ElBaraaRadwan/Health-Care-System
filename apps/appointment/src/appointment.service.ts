@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common';
+import { Appointment } from 'libs/shared/entities';
 
 @Injectable()
 export class AppointmentService {

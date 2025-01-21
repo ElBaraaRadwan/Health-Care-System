@@ -1,38 +1,45 @@
 import { Body, Controller } from '@nestjs/common';
 import { AppointmentService } from './appointment.service';
 import { EventPattern, MessagePattern } from '@nestjs/microservices';
+import { CreateAppointmentDto, UpdateAppointmentDto } from 'libs/shared/DTOs';
 
 @Controller()
 export class AppointmentController {
   constructor(private readonly appointmentService: AppointmentService) {}
 
   @MessagePattern('create-appointment')
-  async createAppointment(@Body() appointment: any) {
+  async createAppointment(@Body() appointment: CreateAppointmentDto) {
     return this.appointmentService.createAppointment(appointment);
   }
 
-  @EventPattern('update-appointment')
-  async updateAppointment(appointment: any) {
+  @MessagePattern('update-appointment')
+  async updateAppointment(appointment: UpdateAppointmentDto) {
     return this.appointmentService.updateAppointment(appointment);
   }
 
-  @EventPattern('delete-appointment')
-  async deleteAppointment(appointment: any) {
-    return this.appointmentService.deleteAppointment(appointment);
+  @MessagePattern('delete-appointment')
+  async deleteAppointment(appointmentID: number) {
+    return this.appointmentService.deleteAppointment(appointmentID);
   }
 
-  @EventPattern('get-appointment')
-  async getAppointment(appointment: any) {
-    return this.appointmentService.getAppointment(appointment);
+  @MessagePattern('get-appointment')
+  async getAppointment(appointmentID: any) {
+    return this.appointmentService.getAppointment(appointmentID);
   }
 
-  @EventPattern('get-all-appointments')
+  @MessagePattern('get-all-appointments')
   async getAllAppointments() {
     return this.appointmentService.getAllAppointments();
   }
 
-  @EventPattern('get-appointment-by')
+  @MessagePattern('get-appointment-by')
   async getAppointmentBy(Arg: any) {
     return this.appointmentService.getAppointmentBy(Arg);
+  }
+
+  @EventPattern('appointment.created')
+  async handleAppointmentCreated(appointment: any) {
+    console.log('Appointment created event received:', appointment);
+    // Further event-specific logic
   }
 }

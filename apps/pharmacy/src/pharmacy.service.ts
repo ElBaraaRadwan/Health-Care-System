@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common';
+import { Pharmacy } from 'libs/shared/entities';
 
 @Injectable()
 export class PharmacyService {

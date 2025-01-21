@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
-import { UserManagementController } from './user-management.controller';
-import { UserManagementService } from './user-management.service';
+import { UserController } from './user-management.controller';
+import { UserService } from './user-management.service';
 import { ClientsModule, Transport } from '@nestjs/microservices';
 
 @Module({
@@ -20,7 +20,7 @@ import { ClientsModule, Transport } from '@nestjs/microservices';
         },
       ]),
     ],
-  controllers: [UserManagementController],
-  providers: [UserManagementService],
+  controllers: [UserController],
+  providers: [UserService],
 })
 export class UserManagementModule {}
